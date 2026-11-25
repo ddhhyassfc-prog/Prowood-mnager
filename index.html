@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#183b32"><meta name="description" content="WoodPro Manager - لکڑی اور انٹیریئر کاروبار کا حساب">
+<link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css">
+<title>WoodPro Manager</title>
+</head>
+<body>
+<div id="auth" class="auth-screen">
+ <div class="auth-card"><div class="logo">🪵</div><h1>WoodPro Manager</h1><p>آپ کے لکڑی اور انٹیریئر کاروبار کا مکمل حساب</p>
+ <label>ای میل<input id="email" type="email" placeholder="اپنی ای میل لکھیں"></label>
+ <label>پاس ورڈ<input id="password" type="password" placeholder="کم از کم 6 حروف"></label>
+ <button id="loginBtn">لاگ اِن</button><button id="signupBtn" class="secondary">نیا اکاؤنٹ بنائیں</button>
+ <small id="authMsg">کلاؤڈ استعمال کرنے سے پہلے README میں دی گئی سیٹنگ مکمل کریں۔</small></div>
+</div>
+<div id="app" class="hidden">
+<header><div><div class="brand">🪵 WoodPro Manager</div><small>کاروبار، کام اور حساب ایک جگہ</small></div><button id="logoutBtn" class="outline">لاگ آؤٹ</button></header>
+<nav id="nav">
+<button data-page="home" class="active">🏠<span>ہوم</span></button>
+<button data-page="customers">👥<span>کسٹمرز</span></button>
+<button data-page="jobs">🪚<span>کام</span></button>
+<button data-page="payments">💰<span>ادائیگیاں</span></button>
+<button data-page="reports">📊<span>رپورٹ</span></button>
+</nav>
+<main>
+<section id="home" class="page">
+<div class="welcome"><h2>السلام علیکم!</h2><p>آج کے کاروبار کی صورتحال</p></div>
+<div class="stats">
+<div class="stat"><small>کل کسٹمرز</small><b id="sCustomers">0</b></div>
+<div class="stat"><small>جاری کام</small><b id="sActive">0</b></div>
+<div class="stat"><small>کل وصولی</small><b id="sReceived">Rs. 0</b></div>
+<div class="stat warning"><small>کل بقایا</small><b id="sDue">Rs. 0</b></div>
+</div>
+<div class="section-head"><h3>آج اور آنے والے کام</h3><button class="link" data-go="jobs">تمام کام</button></div><div id="upcoming" class="cards empty">ابھی کوئی کام درج نہیں۔</div>
+<div class="quick"><button data-action="customer">＋ نیا کسٹمر</button><button data-action="job">＋ نیا کام</button><button data-action="payment">＋ ادائیگی درج کریں</button></div>
+</section>
+<section id="customers" class="page hidden">
+<div class="section-head"><h2>کسٹمرز</h2><button data-action="customer">＋ نیا کسٹمر</button></div>
+<input id="customerSearch" class="search" placeholder="نام یا موبائل نمبر سے تلاش کریں">
+<div id="customerList" class="cards empty">کسٹمر ریکارڈ موجود نہیں۔</div>
+</section>
+<section id="jobs" class="page hidden">
+<div class="section-head"><h2>کام کا ریکارڈ</h2><button data-action="job">＋ نیا کام</button></div>
+<div class="filters"><select id="jobFilter"><option value="">تمام کام</option><option>نیا</option><option>جاری</option><option>مکمل</option><option>روکا گیا</option></select><input id="jobSearch" placeholder="کسٹمر یا کام تلاش کریں"></div>
+<div id="jobList" class="cards empty">ابھی کوئی کام درج نہیں۔</div>
+</section>
+<section id="payments" class="page hidden">
+<div class="section-head"><h2>ادائیگیاں</h2><button data-action="payment">＋ ادائیگی درج کریں</button></div>
+<div id="paymentList" class="cards empty">ابھی کوئی ادائیگی درج نہیں۔</div>
+</section>
+<section id="reports" class="page hidden">
+<h2>کاروباری رپورٹ</h2><div class="report-grid">
+<div class="stat"><small>کل طے شدہ رقم</small><b id="rTotal">Rs. 0</b></div>
+<div class="stat"><small>کل وصول شدہ</small><b id="rReceived">Rs. 0</b></div>
+<div class="stat warning"><small>باقی رقم</small><b id="rDue">Rs. 0</b></div>
+<div class="stat"><small>مکمل کام</small><b id="rDone">0</b></div>
+</div><p class="note">یہ رپورٹ درج کیے گئے کاموں اور ادائیگیوں کی بنیاد پر بنتی ہے۔ منافع کے درست حساب کے لیے میٹریل اور مزدوری کی لاگت بھی ہر کام میں درج کریں۔</p>
+</section>
+</main>
+</div>
+<dialog id="modal"><form id="modalForm" method="dialog"><div class="modal-head"><h3 id="modalTitle">نیا ریکارڈ</h3><button type="button" id="closeModal" class="close">✕</button></div><div id="modalFields"></div><div class="modal-actions"><button type="submit">محفوظ کریں</button><button type="button" id="cancelModal" class="secondary">منسوخ</button></div><p id="formMsg" class="form-msg"></p></form></dialog>
+<div id="toast" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="app.js"></script>
+</body></html>
